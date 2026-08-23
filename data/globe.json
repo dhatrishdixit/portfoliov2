@@ -1,0 +1,12 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {"type":"Feature","geometry":{"type":"MultiPolygon","coordinates":[[[[68,36],[74,37],[77,31],[72,25],[68,36]]]]},"properties":{"name":"India"},"id":"IN"},
+    {"type":"Feature","geometry":{"type":"MultiPolygon","coordinates":[[[[-124,49],[-67,47],[-67,25],[-97,25],[-124,32],[-124,49]]]]},"properties":{"name":"United States"},"id":"US"},
+    {"type":"Feature","geometry":{"type":"MultiPolygon","coordinates":[[[[-10,36],[2,44],[15,55],[-2,59],[-10,51],[-10,36]]]]},"properties":{"name":"Europe"},"id":"EU"},
+    {"type":"Feature","geometry":{"type":"MultiPolygon","coordinates":[[[[100,40],[145,45],[153,10],[115,0],[100,40]]]]},"properties":{"name":"Asia"},"id":"AS"},
+    {"type":"Feature","geometry":{"type":"MultiPolygon","coordinates":[[[[-18,35],[50,35],[45,-35],[15,-35],[-18,0],[-18,35]]]]},"properties":{"name":"Africa"},"id":"AF"},
+    {"type":"Feature","geometry":{"type":"MultiPolygon","coordinates":[[[[-82,12],[-35,5],[-35,-55],[-72,-55],[-82,-10],[-82,12]]]]},"properties":{"name":"South America"},"id":"SA"},
+    {"type":"Feature","geometry":{"type":"MultiPolygon","coordinates":[[[[112,-10],[154,-10],[154,-40],[112,-40],[112,-10]]]]},"properties":{"name":"Australia"},"id":"AU"}
+  ]
+}
