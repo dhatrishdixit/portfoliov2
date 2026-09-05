@@ -16,7 +16,11 @@ const ThemeProviderContext = React.createContext<ThemeContextType | null>(null);
 
 export function ThemeProvider({ children,storageKey }: ThemeProviderProps) {
   
-  const [dark,setDark] = React.useState(false);
+  const [dark,setDark] = React.useState(()=>{
+    if(typeof document == "undefined") return false ; 
+
+    return document.documentElement.classList.contains("dark")
+  });
 
 
   React.useEffect(() => {

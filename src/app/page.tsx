@@ -1,11 +1,11 @@
 "use client"
 
-import { ArrowUpRight, Github, Linkedin, Mail, FileText, ExternalLink } from "lucide-react";
+import { ArrowUpRight, Github, Linkedin, Mail, FileText, ExternalLink, Sun, Moon } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { ThemeToggle } from "@/components/theme-toggle";
 import createGlobe from 'cobe';
 import { useEffect, useRef } from "react";
 import { useSpring } from "@react-spring/web";
+import { useTheme } from "@/hooks/useTheme";
 
 
 const projects = [
@@ -21,6 +21,8 @@ const skills = ["TypeScript", "JavaScript", "React", "Next.js", "Node.js", "Expr
 
 
 export default function Home() {
+
+  const {dark,toggleDark} = useTheme();
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const pointerRef = useRef<{
@@ -41,8 +43,6 @@ export default function Home() {
 
  useEffect(() => {
   if (!canvasRef.current) return;
-
-  console.log(localStorage.getItem("theme"))
 
 
 
@@ -102,7 +102,9 @@ export default function Home() {
               <a className="nav-link" href="/blog">Blog</a>
               <a className="nav-link" href="#about">About</a>
             </nav>
-            <ThemeToggle />
+                <Button variant="ghost" size="icon" onClick={toggleDark} aria-label="Toggle dark mode">
+                   {!dark ? <Sun className="size-4" /> : <Moon className="size-4" />}
+                </Button>
           </div>
         </div>
       </header>
