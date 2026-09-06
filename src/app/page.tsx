@@ -6,6 +6,7 @@ import createGlobe from 'cobe';
 import { useEffect, useRef } from "react";
 import { useSpring } from "@react-spring/web";
 import { useTheme } from "@/hooks/useTheme";
+import { KineticText } from "@/components/ui/kinetic-text"
 
 
 const projects = [

@@ -6,6 +6,10 @@
 
 @custom-variant dark (&:is(.dark *));
 
+body {
+  transition: background-color .25s ease, color .25s ease;
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
