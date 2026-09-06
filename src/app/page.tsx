@@ -8,6 +8,7 @@ import { useSpring } from "@react-spring/web";
 import { useTheme } from "next-themes";
 import { AuroraText } from "#components/ui/aurora-text";
 import { AnimatedThemeToggler } from '../components/ui/animated-theme-toggler';
+import InteractiveHoverButton from "#components/shadcn-space/button/button-19";
 
 const LIGHT_GLOBE = {
   dark: 0,
@@ -235,7 +236,7 @@ export default function Home() {
 
       <section className="py-24">
         <div className="container-x rounded-2xl border border-border bg-card p-8 shadow-sm sm:p-12">
-          <div className="flex flex-col justify-between gap-8 sm:flex-row sm:items-end"><div><p className="eyebrow">Writing</p><h2 className="section-title mt-2">Notes from things I build.</h2></div><Button asChild><a href="/blog">Open blog <ArrowUpRight className="ml-2 size-4" /></a></Button></div>
+          <div className="flex flex-col justify-between gap-8 sm:flex-row sm:items-end"><div><p className="eyebrow">Writing</p><h2 className="section-title mt-2">Notes from things I build.</h2></div><InteractiveHoverButton><a href="/blog">Open blog</a></InteractiveHoverButton></div>
           <p className="mt-5 max-w-xl leading-7 text-muted-foreground">Short technical notes on authentication, web development and experiments.</p>
         </div>
       </section>

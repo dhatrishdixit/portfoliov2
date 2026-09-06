@@ -327,7 +327,7 @@ export const AnimatedThemeToggler = ({
   }
 
   return (
-    <ClassicBtn buttonRef={buttonRef} {...btnProps}/>
+    <ClassicBtn buttonRef={buttonRef} {...btnProps} className="cursor-pointer"/>
 
   )
 }
