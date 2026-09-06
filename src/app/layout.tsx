@@ -15,20 +15,17 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              (function() {
-                try {
-                  const theme = localStorage.getItem('dark') || 'system';
-                  const isDark = theme === 'dark' || 
-                    (theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
-                  document.documentElement.classList.toggle('dark', isDark);
-                } catch (e) {}
-              })();
-            `,
-          }}
-        />
+        <Script id="theme-script" strategy="beforeInteractive">
+        {
+          `
+            (function(){
+              const saved = localStorage.getItem(${storageKey});
+              const isDark = saved == "true" ? true : ( saved == "false" ? false : window.matchMedia("(prefers-color-scheme: dark)").matches);
+              document.documentElement.classList.toggle("dark",isDark);
+             })()
+          `
+        }
+      </Script>
       </head>
          
       <body>

@@ -1,6 +1,5 @@
 import { ArrowLeft, ArrowUpRight, CalendarDays } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { ThemeToggle } from "@/components/theme-toggle";
 
 const posts = [
   { title: "OAuth 2.0 & OpenID Connect from the ground up", description: "Understanding authorization flows, tokens, sessions and the protocol decisions behind a working implementation.", href: "https://journal.dhatrish.in", date: "Technical writing" },
