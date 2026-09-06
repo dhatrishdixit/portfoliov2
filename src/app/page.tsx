@@ -84,7 +84,7 @@ export default function Home() {
 
     dark: 1,
     diffuse: 1.2,
-    mapSamples: 16000,
+    mapSamples: 40000,
     mapBrightness: 6,
 
     baseColor: [0.3, 0.3, 0.3],
@@ -129,7 +129,7 @@ export default function Home() {
       <header className="sticky top-0 z-30 border-b border-border/70 bg-background/85 backdrop-blur-xl">
         <div className="container-x flex h-16 items-center justify-between">
           <a href="#top" className="font-semibold tracking-tight">dhatrish.dev</a>
-          <div className="flex items-center gap-1">
+          <div className="flex items-center gap-3">
             <nav className="hidden items-center gap-1 text-sm text-muted-foreground sm:flex">
               <a className="nav-link" href="#work">Work</a>
               <a className="nav-link" href="/blog">Blog</a>

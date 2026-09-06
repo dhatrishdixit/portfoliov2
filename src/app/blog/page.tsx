@@ -1,5 +1,10 @@
+"use client"
+
 import { ArrowLeft, ArrowUpRight, CalendarDays } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useTheme } from 'next-themes';
+import { AnimatedThemeToggler } from '../../components/ui/animated-theme-toggler';
+
 
 const posts = [
   { title: "OAuth 2.0 & OpenID Connect from the ground up", description: "Understanding authorization flows, tokens, sessions and the protocol decisions behind a working implementation.", href: "https://journal.dhatrish.in", date: "Technical writing" },
@@ -8,8 +13,15 @@ const posts = [
 ];
 
 export default function BlogPage() {
+
+  const {resolvedTheme,setTheme} = useTheme();
+
+
   return <main className="min-h-screen">
-    <header className="sticky top-0 z-30 border-b border-border/70 bg-background/85 backdrop-blur-xl"><div className="container-x flex h-16 items-center justify-between"><a href="/" className="font-semibold tracking-tight">dhatrish.dev</a><div className="flex items-center gap-1"><a className="nav-link hidden sm:inline-flex" href="/">Home</a>ThemeToggle</div></div></header>
+    <header className="sticky top-0 z-30 border-b border-border/70 bg-background/85 backdrop-blur-xl"><div className="container-x flex h-16 items-center justify-between"><a href="/" className="font-semibold tracking-tight">dhatrish.dev</a><div className="flex items-center gap-1"><a className="nav-link hidden sm:inline-flex" href="/">Home</a><AnimatedThemeToggler
+                    theme={resolvedTheme === "dark" ? "dark" : "light"}
+                    onThemeChange={setTheme}
+                 /></div></div></header>
     <section className="container-x py-24 sm:py-32">
       <Button variant="ghost" asChild className="mb-10 -ml-3"><a href="/"><ArrowLeft className="mr-2 size-4" />Back home</a></Button>
       <div className="max-w-3xl animate-fade-up"><p className="eyebrow">Journal</p><h1 className="mt-3 text-5xl font-semibold tracking-[-0.045em] sm:text-6xl">Things I’ve learned while building.</h1><p className="mt-6 text-lg leading-8 text-muted-foreground">Notes on authentication, backend engineering, distributed systems and the experiments behind my projects.</p></div>
