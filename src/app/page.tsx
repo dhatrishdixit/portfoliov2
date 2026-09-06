@@ -9,6 +9,29 @@ import { useTheme } from "next-themes";
 import { AuroraText } from "#components/ui/aurora-text";
 import { AnimatedThemeToggler } from '../components/ui/animated-theme-toggler';
 
+const LIGHT_GLOBE = {
+  dark: 0,
+  baseColor: [0.9, 0.9, 0.9] as [number, number, number],
+  markerColor: [0.1, 0.6, 1] as [number, number, number],
+  glowColor: [1, 1, 1] as [number, number, number],
+};
+const DARK_GLOBE = {
+  dark: 1,
+  baseColor: [0.3, 0.3, 0.3] as [number, number, number],
+  markerColor: [0.1, 0.8, 1] as [number, number, number],
+  glowColor: [1, 1, 1] as [number, number, number],
+};
+
+const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
+const lerpColor = (
+  a: [number, number, number],
+  b: [number, number, number],
+  t: number
+): [number, number, number] => [
+  lerp(a[0], b[0], t),
+  lerp(a[1], b[1], t),
+  lerp(a[2], b[2], t),
+];
 
 const projects = [
   { title: "Event-Driven Microservices", desc: "A distributed system built around independent services, async events and containerized deployments.", tags: ["Node.js", "Docker", "Kubernetes"], href: "https://github.com/dhatrishdixit/NodeMicroserviceTemplate", featured: true },
@@ -39,8 +62,11 @@ export default function Home() {
     r:0,
     theta:0
   })
-  const [{ r,t }, api] = useSpring(() => ({ r: 0,t:0 }));
-
+  const [{ r,t,colorT }, api] = useSpring(() => ({ r: 0,t:0,colorT: resolvedTheme === "dark" ? 1 : 0,config: { duration: 400 } }));
+  
+  useEffect(()=>{
+    api.start({colorT:resolvedTheme === "dark" ? 1 : 0})
+  },[resolvedTheme,api])
  
 
  useEffect(() => {
@@ -63,12 +89,12 @@ export default function Home() {
 
     baseColor: [0.3, 0.3, 0.3],
     markerColor: [0.1, 0.8, 1],
-    glowColor: [1, 1, 1],
+    glowColor: [0.3, 0.3, 0.3],
 
-    markers: [
-      { location: [37.7595, -122.4367], size: 0.03 },
-      { location: [40.7128, -74.006], size: 0.1 },
-    ],
+    // markers: [
+    //   { location: [37.7595, -122.4367], size: 0.03 },
+    //   { location: [40.7128, -74.006], size: 0.1 },
+    // ],
   });
 
   let phi = 0;
@@ -77,10 +103,15 @@ export default function Home() {
 
   const animate = () => {
     if(!isHold.current) phi += 0.005;
+    const mix = colorT.get();
 
     globe.update({
       phi: phi + r.get(),
       theta: baseTheta + t.get(),
+      dark: lerp(LIGHT_GLOBE.dark, DARK_GLOBE.dark, mix),
+      baseColor: lerpColor(LIGHT_GLOBE.baseColor, DARK_GLOBE.baseColor, mix),
+      markerColor: lerpColor(LIGHT_GLOBE.markerColor, DARK_GLOBE.markerColor, mix),
+      glowColor: lerpColor(LIGHT_GLOBE.glowColor, DARK_GLOBE.glowColor, mix),
     });
 
     animationFrame = requestAnimationFrame(animate);

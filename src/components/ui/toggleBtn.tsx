@@ -30,7 +30,6 @@ export function ClassicBtn({
       className={className}
       onClick={onClick}
       ref={buttonRef}
-      {...props}
     >
       <svg
         width="1em"

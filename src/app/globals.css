@@ -158,3 +158,13 @@ a { color: inherit; text-decoration: none; }
     animation: none;
     mix-blend-mode: normal;
 }
+
+canvas {
+  view-transition-name: globe;
+}
+::view-transition-group(globe),
+::view-transition-old(globe),
+::view-transition-new(globe) {
+  animation: none !important;
+  mix-blend-mode: normal;
+}
