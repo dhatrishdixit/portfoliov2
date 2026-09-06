@@ -3,6 +3,7 @@ import { Moon, Sun } from "lucide-react"
 import { flushSync } from "react-dom"
 
 import { cn } from "#lib/utils"
+import { ClassicBtn } from "./toggleBtn";
 
 export type TransitionVariant =
   | "circle"
@@ -313,16 +314,20 @@ export const AnimatedThemeToggler = ({
     cancelAnim,
   ])
 
+    type btnPropType = {
+      type: "button" | "reset" | "submit" | undefined,
+      onClick: () => void
+      className: string
+    }
+
+    const btnProps:btnPropType = {
+      type : "button",
+      onClick : toggleTheme,
+      className : cn(className)
+  }
+
   return (
-    <button
-      type="button"
-      ref={buttonRef}
-      onClick={toggleTheme}
-      className={cn(className)}
-      {...props}
-    >
-      {isDark ? <Sun /> : <Moon />}
-      <span className="sr-only">Toggle theme</span>
-    </button>
+    <ClassicBtn buttonRef={buttonRef} {...btnProps}/>
+
   )
 }
