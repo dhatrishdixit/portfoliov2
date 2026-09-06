@@ -236,7 +236,7 @@ export default function Home() {
 
       <section className="py-24">
         <div className="container-x rounded-2xl border border-border bg-card p-8 shadow-sm sm:p-12">
-          <div className="flex flex-col justify-between gap-8 sm:flex-row sm:items-end"><div><p className="eyebrow">Writing</p><h2 className="section-title mt-2">Notes from things I build.</h2></div><InteractiveHoverButton><a href="/blog">Open blog</a></InteractiveHoverButton></div>
+          <div className="flex flex-col justify-between gap-8 sm:flex-row sm:items-end"><div><p className="eyebrow">Writing</p><h2 className="section-title mt-2">Notes from things I build.</h2></div><InteractiveHoverButton className="mb-10 -ml-3"><a href="/blog">Open blog</a></InteractiveHoverButton></div>
           <p className="mt-5 max-w-xl leading-7 text-muted-foreground">Short technical notes on authentication, web development and experiments.</p>
         </div>
       </section>
