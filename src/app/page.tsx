@@ -7,6 +7,7 @@ import { useEffect, useRef } from "react";
 import { useSpring } from "@react-spring/web";
 import { useTheme } from "@/hooks/useTheme";
 import { KineticText } from "@/components/ui/kinetic-text"
+import { AuroraText } from "#components/ui/aurora-text";
 
 
 const projects = [
@@ -115,7 +116,7 @@ export default function Home() {
         <div className="container-x relative grid min-h-[78vh] items-center gap-16 py-24 lg:grid-cols-[1.1fr_.9fr]">
           <div className="animate-fade-up">
             <p className="mb-5 text-sm font-medium uppercase tracking-[0.18em] text-muted-foreground">Software engineer · Bangalore</p>
-            <h1 className="max-w-3xl text-5xl font-semibold tracking-[-0.045em] sm:text-7xl">I build things for the web.</h1>
+            <h1 className="max-w-3xl text-5xl font-semibold tracking-[-0.045em] sm:text-7xl">I build things for the <AuroraText>web.</AuroraText></h1>
             <p className="mt-6 max-w-xl text-base leading-7 text-muted-foreground">I’m a software engineer who enjoys building full-stack products, exploring new technologies and understanding what happens under the hood.</p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Button variant="outline" asChild><a href="https://github.com/dhatrishdixit" target="_blank" rel="noreferrer">GitHub <Github className="ml-2 size-4" /></a></Button>
