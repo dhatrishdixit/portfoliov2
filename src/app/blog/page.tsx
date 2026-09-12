@@ -19,7 +19,7 @@ export default function BlogPage() {
 
 
   return <main className="min-h-screen">
-    <header className="sticky top-0 z-30 border-b border-border/70 bg-background/85 backdrop-blur-xl"><div className="container-x flex h-16 items-center justify-between"><a href="/" className="font-semibold tracking-tight">dhatrish.dev</a><div className="flex items-center gap-1"><a className="nav-link hidden sm:inline-flex" href="/">Home</a><AnimatedThemeToggler
+    <header className="sticky top-0 z-30 border-b border-border/70 bg-background/85 backdrop-blur-xl"><div className="container-x flex h-16 items-center justify-between"><a href="/" className="font-semibold tracking-tight">dhatrish.in</a><div className="flex items-center gap-1"><a className="nav-link hidden sm:inline-flex" href="/">Home</a><AnimatedThemeToggler
                     theme={resolvedTheme === "dark" ? "dark" : "light"}
                     onThemeChange={setTheme}
                  /></div></div></header>
@@ -29,7 +29,7 @@ export default function BlogPage() {
       <div className="mt-16 max-w-4xl divide-y divide-border border-y border-border">
         {posts.map((post, i) => <a key={post.title} href={post.href} target="_blank" rel="noreferrer" className="blog-row group block py-8"><div className="flex gap-6"><span className="pt-1 text-xs text-muted-foreground/70">0{i + 1}</span><div className="flex-1"><div className="flex flex-wrap items-center gap-2 text-xs text-muted-foreground"><CalendarDays className="size-3.5" />{post.date}</div><h2 className="mt-3 text-2xl font-semibold tracking-tight group-hover:underline group-hover:underline-offset-4">{post.title}</h2><p className="mt-3 max-w-2xl leading-7 text-muted-foreground">{post.description}</p></div><ArrowUpRight className="mt-1 size-5 shrink-0 text-muted-foreground transition-transform duration-300 group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-foreground" /></div></a>)}
       </div>
-      <div className="mt-10"><Button asChild><a href="https://journal.dhatrish.in" target="_blank" rel="noreferrer">Visit journal <ArrowUpRight className="ml-2 size-4" /></a></Button></div>
+      <div className="mt-10"><Button asChild className="dark:text-black text-white bg-black dark:bg-white"><a href="https://journal.dhatrish.in" target="_blank" rel="noreferrer">Visit journal <ArrowUpRight className="ml-2 size-4" /></a></Button></div>
     </section>
   </main>;
 }
