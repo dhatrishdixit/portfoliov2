@@ -1,35 +1,17 @@
-// proxy.ts (Next.js 16+)
-// If using Next.js 15 or earlier, name this file middleware.ts
-import { NextResponse } from 'next/server'
-import type { NextRequest } from 'next/server'
-//import { redis } from './src/lib/redis';
+import type { NextRequest, NextResponse } from "next/server";
 
-// 1. The main execution function
-export function proxy(request: NextRequest) {
-  const userCountry = request.headers.get("x-vercel-ip-country");
-  const isAlreadyCounted = request.cookies.get("visited")?.value;
+export default function proxy(request: NextRequest,response:NextResponse) {
   
-  console.log(isAlreadyCounted);
-  console.log('testing')
+  response.cookies.set('visited', '1', { maxAge: 60 * 60 * 24 })
 
-  if(!userCountry) return NextResponse.next()
-
-  console.log(userCountry);
-
- // const countryCount:number|null = await redis.get(userCountry);
- // const newCount = countryCount == null ? 1 : countryCount + 1;
-
-  //await redis.set(userCountry,newCount);
-  // Continue with the original request lifecycle if conditions pass
-
-
-  
-  return NextResponse.next()
+  return new Response("🔥 PROXY IS WORKING", {
+    status: 200,
+    headers: {
+      "Content-Type": "text/plain",
+    },
+  });
 }
 
-// 2. The Matcher Config
-// Filters which paths this proxy function will execute on
 export const config = {
- // matcher: ['/((?!api|_next/static|_next/image|favicon.ico).*)'],
-  matcher: ["/:path*"]
-}
+  matcher: ["/:path*"],
+};

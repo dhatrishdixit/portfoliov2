@@ -5,7 +5,7 @@ import type { NextRequest } from 'next/server'
 //import { redis } from './src/lib/redis';
 
 // 1. The main execution function
-export function proxy(request: NextRequest) {
+export function proxy(request: NextRequest,response:NextResponse) {
   const userCountry = request.headers.get("x-vercel-ip-country");
   const isAlreadyCounted = request.cookies.get("visited")?.value;
   
@@ -13,6 +13,7 @@ export function proxy(request: NextRequest) {
   console.log('testing')
 
   if(!userCountry) return NextResponse.next()
+    response.cookies.set('visited', '1', { maxAge: 60 * 60 * 24 })
 
   console.log(userCountry);
 
