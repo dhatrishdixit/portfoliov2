@@ -168,3 +168,7 @@ canvas {
   animation: none !important;
   mix-blend-mode: normal;
 }
+
+.live-counter { display:flex; gap: 8px; align-items:center; font-size: 12px; color: var(--muted-ink); }
+.live-counter strong { color: var(--ink); }
+.live-dot { width: 7px; height:7px; border-radius:50%; background:#8bda2b; box-shadow: 0 0 0 4px rgba(139,218,43,.16); }
