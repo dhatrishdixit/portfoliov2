@@ -9,6 +9,7 @@ import { useTheme } from "next-themes";
 import { AuroraText } from "#components/ui/aurora-text";
 import { AnimatedThemeToggler } from '../components/ui/animated-theme-toggler';
 import InteractiveHoverButton from "#components/shadcn-space/button/button-19";
+import LiveUserCount from "#components/live-user-count";
 
 const LIGHT_GLOBE = {
   dark: 0,
@@ -140,6 +141,7 @@ export default function Home() {
                     theme={resolvedTheme === "dark" ? "dark" : "light"}
                     onThemeChange={setTheme}
                  />
+                 <LiveUserCount />
           </div>
         </div>
       </header>
