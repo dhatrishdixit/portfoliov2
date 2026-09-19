@@ -15,7 +15,7 @@ export async function proxy(request: NextRequest,event:NextFetchEvent) {
      response.cookies.set('visited', '1', { maxAge: 60 * 60 * 24 })
   }
   
-  return NextResponse.next()
+  return response;
 }
 
 export const config = {
