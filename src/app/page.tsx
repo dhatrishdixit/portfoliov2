@@ -72,21 +72,22 @@ export default function Home() {
  
 
  useEffect(() => {
-  if (!canvasRef.current) return;
+  const canvas = canvasRef.current;
+  if (!canvas) return;
+  let width = canvas.offsetWidth;
 
 
-
-  const globe = createGlobe(canvasRef.current, {
+  const globe = createGlobe(canvas, {
     devicePixelRatio: 2,
-    width: 100 * 2,
-    height: 100 * 2,
+    width: width * 2,
+    height: width * 2,
 
     phi: 0,
     theta: 0.2,
 
     dark: 1,
     diffuse: 1.2,
-    mapSamples: 40000,
+    mapSamples: 20000,
     mapBrightness: 6,
 
     baseColor: [0.3, 0.3, 0.3],
@@ -108,6 +109,8 @@ export default function Home() {
     const mix = colorT.get();
 
     globe.update({
+      width: width * 2,   
+      height: width * 2,
       phi: phi + r.get(),
       theta: baseTheta + t.get(),
       dark: lerp(LIGHT_GLOBE.dark, DARK_GLOBE.dark, mix),
