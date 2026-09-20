@@ -87,7 +87,7 @@ export default function Home() {
 
     dark: 1,
     diffuse: 1.2,
-    mapSamples: 20000,
+    mapSamples: 26000,
     mapBrightness: 6,
 
     baseColor: [0.3, 0.3, 0.3],
