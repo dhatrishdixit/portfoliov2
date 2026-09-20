@@ -8,8 +8,14 @@ function LiveUserCount() {
   const [liveUserCount,setLiveUserCount] = useState<number>(0);
 
   useEffect(()=>{
+
+    const func = () => {
+        return liveCount().then(setLiveUserCount).catch((err)=>console.log(err));
+    }
+
+    func();
     const intervalId = setInterval(()=>{
-        liveCount().then(setLiveUserCount).catch((err)=>console.log(err))
+        func();
     },30_000)
 
     return () => {
