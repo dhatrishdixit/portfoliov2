@@ -6,8 +6,6 @@ import { redis } from './lib/redis';
 export async function proxy(request: NextRequest,event:NextFetchEvent) {
   const userCountry = request.headers.get("x-vercel-ip-country");
   const isAlreadyCounted = request.cookies.get("visited")?.value;
-  // console.log(isAlreadyCounted);
-  // console.log(userCountry);
   const response = NextResponse.next();
 
   if(userCountry && isAlreadyCounted == undefined){
