@@ -27,9 +27,9 @@ function LiveUserCount() {
 
   return (
     <div>
-      <span className="text-sm text-muted-foreground flex items-center">
+      <span className="text-sm text-muted-foreground flex items-center gap-2.5">
         <div className="blinking-live-counter" /><span className="py-[10.4px]">
-          {liveUserCount} {liveUserCount === 1 ? "Person i.e. you ❤️" : "People"}
+          {liveUserCount} {liveUserCount === 1 ? "Person" : "People"}
         </span>
       </span>
     </div> 

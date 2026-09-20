@@ -132,7 +132,7 @@ export default function Home() {
         <div className="container-x flex h-16 items-center justify-between">
           <a href="#top" className="font-semibold tracking-tight">dhatrish.in</a>
           <div className="flex items-center gap-3">
-            <nav className="hidden items-center gap-1 text-sm text-muted-foreground sm:flex">
+            <nav className="hidden items-center gap-3 text-sm text-muted-foreground sm:flex">
               <a className="nav-link" href="#work">Work</a>
               <a className="nav-link" href="/blog">Blog</a>
               <a className="nav-link" href="#about">About</a>
@@ -145,10 +145,10 @@ export default function Home() {
           </div>
         </div>
       </header>
-
+     
       <section id="top" className="relative overflow-hidden">
         <div className="absolute inset-0 grid-fade pointer-events-none" />
-        <div className="container-x relative grid min-h-[78vh] items-center gap-16 py-24 lg:grid-cols-[1.1fr_.9fr]">
+        <div className="container-x relative grid min-h-[calc(100dvh-4rem)] items-center gap-10 pt-5.5 pb-17  sm:gap-16  lg:min-h-[calc(100svh-4rem)] 2xl:py-24 xl:grid-cols-[1.1fr_.9fr]">
           <div className="animate-fade-up">
             <p className="mb-5 text-sm font-medium uppercase tracking-[0.18em] text-muted-foreground">Software engineer · Bangalore</p>
             <h1 className="max-w-3xl text-5xl font-semibold tracking-[-0.045em] sm:text-7xl">I build things for the <AuroraText>web .</AuroraText></h1>
