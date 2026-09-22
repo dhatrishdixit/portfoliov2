@@ -94,10 +94,10 @@ export default function Home() {
     markerColor: [0.1, 0.8, 1],
     glowColor: [0.3, 0.3, 0.3],
 
-    // markers: [
-    //   { location: [37.7595, -122.4367], size: 0.03 },
-    //   { location: [40.7128, -74.006], size: 0.1 },
-    // ],
+    markers: [
+      { location: [20.59, 78.96], size: 0.03 },
+      // { location: [40.7128, -74.006], size: 0.1 },
+    ],
   });
 
   let phi = 0;
