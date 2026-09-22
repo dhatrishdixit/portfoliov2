@@ -2,6 +2,14 @@
 
 import { ObjectSpaceNormalMap } from 'three';
 import { redis } from './redis';
+import { CENTROIDS } from './country-centroids';
+
+export type VisitMarker = {
+    country:string,
+    lat:number,
+    long:number,
+    count:number
+}
 
 export async function liveCount(){
     try {
@@ -19,16 +27,31 @@ export async function liveCount(){
     }
 }
 
-export async function userPerCountry():Promise<Record<string, number>>{
+export async function userPerCountry():Promise<VisitMarker[]>{
    try {
        const counts = await redis.hgetall<Record<string, string|number>>("visits_by_country");
-       if(!counts) return {};
+       if(!counts) return [];
 
-       return Object.fromEntries(
-           Object.entries(counts).map((country,count)=>[country,Number(count)])
-       )
+
+       return Object.entries(counts).map(([country,count])=>{
+           const centroid = CENTROIDS[country];
+           if(!centroid) return null ; 
+           const lat = CENTROIDS[country][0];
+           const long = CENTROIDS[country][1];
+           const parsedCount = Number(count);
+           if(parsedCount <= 0) return null;
+
+           return {
+              country,
+              lat,
+              long,
+              count:parsedCount
+           }
+       }).filter((marker)=>marker !== null)
+
+
    } catch (error) {
         console.log(error instanceof Error ? error.message : String(error));
-        return {} ;
+        return [] ;
    }
 }
