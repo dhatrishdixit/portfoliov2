@@ -10,6 +10,7 @@ import { AuroraText } from "#components/ui/aurora-text";
 import { AnimatedThemeToggler } from '../components/ui/animated-theme-toggler';
 import InteractiveHoverButton from "#components/shadcn-space/button/button-19";
 import LiveUserCount from "#components/live-user-count";
+import { userPerCountry } from "#lib/actions";
 
 const LIGHT_GLOBE = {
   dark: 0,
@@ -46,6 +47,11 @@ const projects = [
 
 const skills = ["TypeScript", "JavaScript", "React", "Next.js", "Node.js", "Express", "MongoDB", "Prisma", "Docker", "Kubernetes", "C++", "SQL"];
 
+type markerType = {
+     location: [number,number],
+     size: number
+}
+
 
 export default function Home() {
 
@@ -57,6 +63,7 @@ export default function Home() {
      y:number
   } | null>(null);
   const isHold = useRef<boolean>(false);
+  const markerRef = useRef<markerType[]>([]);
   const dragStartRef = useRef<{
     r: number,
     theta: number
@@ -65,13 +72,41 @@ export default function Home() {
     theta:0
   })
   const [{ r,t,colorT }, api] = useSpring(() => ({ r: 0,t:0,colorT: resolvedTheme === "dark" ? 1 : 0,config: { duration: 400 } }));
+
+  useEffect(()=>{
+     const markerUpdate = () => {
+      userPerCountry().then((data)=>{
+           markerRef.current = data.map((val)=> {
+               return {
+                    id:val.country,
+                    location:[val.lat,val.long],
+                    size: 0.03,
+                    label:`${val.country} : ${val.count} viewers`,
+               }
+           });
+
+           console.log(markerRef.current)
+     })
+     }
+
+     markerUpdate();
+
+     const onVisible = ()=>{
+        if(document.visibilityState == "visible") markerUpdate();
+     }
+
+     document.addEventListener("visibilitychange",onVisible);
+
+     return () => document.removeEventListener("visibilitychange",onVisible);
+
+  },[]);
   
   useEffect(()=>{
     api.start({colorT:resolvedTheme === "dark" ? 1 : 0})
   },[resolvedTheme,api])
- 
 
- useEffect(() => {
+
+  useEffect(() => {
   const canvas = canvasRef.current;
   if (!canvas) return;
   let width = canvas.offsetWidth;
@@ -111,6 +146,7 @@ export default function Home() {
     globe.update({
       width: width * 2,   
       height: width * 2,
+      markers: markerRef.current,
       phi: phi + r.get(),
       theta: baseTheta + t.get(),
       dark: lerp(LIGHT_GLOBE.dark, DARK_GLOBE.dark, mix),
