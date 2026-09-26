@@ -49,7 +49,9 @@ const skills = ["TypeScript", "JavaScript", "React", "Next.js", "Node.js", "Expr
 
 type markerType = {
      location: [number,number],
-     size: number
+     size: number,
+     id:string,
+     label:string,
 }
 
 
@@ -241,6 +243,18 @@ export default function Home() {
                       console.log(e.pointerId,e.pointerType);
                     }}
                   />
+                  {markerRef.current.map(m => (
+  <div
+    key={m.id}
+    className="marker-label"
+    style={{
+      positionAnchor: `--cobe-${m.id}`,
+      opacity: `var(--cobe-visible-${m.id}, 0)`
+    }}
+  >
+    {m.label}
+  </div>
+))}
           </div>
         </div>
       </section>
