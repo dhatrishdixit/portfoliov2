@@ -3,7 +3,7 @@
 import { ArrowUpRight, Github, Linkedin, Mail, FileText, ExternalLink, Sun, Moon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import createGlobe from 'cobe';
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useSpring } from "@react-spring/web";
 import { useTheme } from "next-themes";
 import { AuroraText } from "#components/ui/aurora-text";
@@ -51,13 +51,18 @@ type markerType = {
      location: [number,number],
      size: number,
      id:string,
-     label:string,
+}
+
+type markerLabelType = {
+     id: string,
+     label:string
 }
 
 
 export default function Home() {
 
   const {resolvedTheme,setTheme} = useTheme();
+  const [markerLabel,setMarkerLabel] = useState<markerLabelType[]>([]);
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const pointerRef = useRef<{
@@ -77,18 +82,24 @@ export default function Home() {
 
   useEffect(()=>{
      const markerUpdate = () => {
+      const markerLabelArr:markerLabelType[] = [];
       userPerCountry().then((data)=>{
            markerRef.current = data.map((val)=> {
+               markerLabelArr.push({
+                id:val.country,
+                label:`${val.country} : ${val.count} viewers`,
+               })
                return {
                     id:val.country,
                     location:[val.lat,val.long],
-                    size: 0.03,
-                    label:`${val.country} : ${val.count} viewers`,
+                    size: Math.min(0.12, 0.03 + Math.log(val.count + 1) * 0.015),
                }
-           });
+           }
+          );
+     }).catch(err => console.log(err))
 
-           console.log(markerRef.current)
-     })
+     setMarkerLabel(markerLabelArr);
+     console.log(markerLabelArr)
      }
 
      markerUpdate();
@@ -132,8 +143,6 @@ export default function Home() {
     glowColor: [0.3, 0.3, 0.3],
 
     markers: [
-      { location: [20.59, 78.96], size: 0.03 },
-      // { location: [40.7128, -74.006], size: 0.1 },
     ],
   });
 
@@ -243,7 +252,7 @@ export default function Home() {
                       console.log(e.pointerId,e.pointerType);
                     }}
                   />
-                  {markerRef.current.map(m => (
+                  {markerLabel.map(m => (
   <div
     key={m.id}
     className="marker-label"
