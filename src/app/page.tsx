@@ -15,7 +15,7 @@ import { userPerCountry } from "#lib/actions";
 const LIGHT_GLOBE = {
   dark: 0,
   baseColor: [0.9, 0.9, 0.9] as [number, number, number],
-  markerColor: [0.1, 0.6, 1] as [number, number, number],
+  markerColor: [1, 0, 0] as [number, number, number],
   glowColor: [1, 1, 1] as [number, number, number],
 };
 const DARK_GLOBE = {
@@ -92,7 +92,7 @@ export default function Home() {
                return {
                     id:val.country,
                     location:[val.lat,val.long],
-                    size: Math.min(0.12, 0.03 + Math.log(val.count + 1) * 0.015),
+                    size: 0.02,
                }
            }
           );
@@ -162,6 +162,7 @@ export default function Home() {
       phi: phi + r.get(),
       theta: baseTheta + t.get(),
       dark: lerp(LIGHT_GLOBE.dark, DARK_GLOBE.dark, mix),
+      markerElevation:0,
       baseColor: lerpColor(LIGHT_GLOBE.baseColor, DARK_GLOBE.baseColor, mix),
       markerColor: lerpColor(LIGHT_GLOBE.markerColor, DARK_GLOBE.markerColor, mix),
       glowColor: lerpColor(LIGHT_GLOBE.glowColor, DARK_GLOBE.glowColor, mix),
