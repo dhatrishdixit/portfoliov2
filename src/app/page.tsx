@@ -96,10 +96,11 @@ export default function Home() {
                }
            }
           );
+          setMarkerLabel(markerLabelArr);
+          console.log(markerLabelArr)
      }).catch(err => console.log(err))
 
-     setMarkerLabel(markerLabelArr);
-     console.log(markerLabelArr)
+
      }
 
      markerUpdate();
