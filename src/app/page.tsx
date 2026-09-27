@@ -119,12 +119,12 @@ export default function Home() {
                return {
                     id:val.country,
                     location:[val.lat,val.long],
-                    size: 0.02,
+                    size: 0.023,
                }
            }
           );
           setMarkerLabel(markerLabelArr);
-          console.log(markerLabelArr)
+          //console.log(markerLabelArr)
      }).catch(err => console.log(err))
 
 
@@ -262,7 +262,7 @@ export default function Home() {
                        if(pointerRef.current !== null){
                         const deltaX = e.clientX - pointerRef.current.x;
                         const deltaY = e.clientY - pointerRef.current.y;
-                        console.log(deltaY)
+                        //console.log(deltaY)
                        api.start({
                          r: dragStartRef?.current.r+deltaX/ 200,
                          t: Math.max(-1,Math.min(1, (dragStartRef?.current.theta+deltaY/ 250))),
@@ -280,7 +280,7 @@ export default function Home() {
                       };
                       isHold.current = true ; 
                       e.currentTarget.setPointerCapture(e.pointerId);
-                      console.log(e.pointerId,e.pointerType);
+                      //console.log(e.pointerId,e.pointerType);
                     }}
                   />
                   {markerLabel.filter(m => m.count > 5).map((m,i) => {
