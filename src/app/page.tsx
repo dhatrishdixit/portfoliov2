@@ -14,15 +14,17 @@ import { userPerCountry } from "#lib/actions";
 
 const LIGHT_GLOBE = {
   dark: 0,
+  diffuse:1.2,
   baseColor: [0.9, 0.9, 0.9] as [number, number, number],
   markerColor: [1, 0, 0] as [number, number, number],
   glowColor: [1, 1, 1] as [number, number, number],
 };
 const DARK_GLOBE = {
   dark: 1,
+  diffuse:0.6,
   baseColor: [0.3, 0.3, 0.3] as [number, number, number],
-  markerColor: [0.1, 0.8, 1] as [number, number, number],
-  glowColor: [1, 1, 1] as [number, number, number],
+  markerColor: [1, 0, 0] as [number, number, number],
+  glowColor: [0.15, 0.15, 0.15]  as [number, number, number],
 };
 
 const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
@@ -55,7 +57,8 @@ type markerType = {
 
 type markerLabelType = {
      id: string,
-     label:string
+     label:string,
+     count: number,
 }
 
 
@@ -86,8 +89,9 @@ export default function Home() {
       userPerCountry().then((data)=>{
            markerRef.current = data.map((val)=> {
                markerLabelArr.push({
-                id:val.country,
+                id: val.country,
                 label:`${val.country} : ${val.count} viewers`,
+                count: val.count,
                })
                return {
                     id:val.country,
@@ -163,6 +167,7 @@ export default function Home() {
       theta: baseTheta + t.get(),
       dark: lerp(LIGHT_GLOBE.dark, DARK_GLOBE.dark, mix),
       markerElevation:0,
+      diffuse:lerp(LIGHT_GLOBE.diffuse,DARK_GLOBE.diffuse,mix),
       baseColor: lerpColor(LIGHT_GLOBE.baseColor, DARK_GLOBE.baseColor, mix),
       markerColor: lerpColor(LIGHT_GLOBE.markerColor, DARK_GLOBE.markerColor, mix),
       glowColor: lerpColor(LIGHT_GLOBE.glowColor, DARK_GLOBE.glowColor, mix),
@@ -254,18 +259,20 @@ export default function Home() {
                       console.log(e.pointerId,e.pointerType);
                     }}
                   />
-                  {markerLabel.map(m => (
-  <div
-    key={m.id}
-    className="marker-label"
-    style={{
-      positionAnchor: `--cobe-${m.id}`,
-      opacity: `var(--cobe-visible-${m.id}, 0)`
-    }}
-  >
-    {m.label}
-  </div>
-))}
+                  {markerLabel.filter(m => m.count > 5).map((m,i) => {
+                    return (
+                      <div
+                        key={m.id}
+                        className="marker-label"
+                        style={{
+                          positionAnchor: `--cobe-${m.id}`,
+                          opacity: `var(--cobe-visible-${m.id}, 0)`,
+                        }}
+                      >
+                        {m.label}
+                      </div>
+                    )
+                  })}
           </div>
         </div>
       </section>
