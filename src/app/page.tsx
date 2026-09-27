@@ -41,12 +41,42 @@ const lerpColor = (
 ];
 
 const projects = [
-  { title: "Event-Driven Microservices", desc: "A distributed system built around independent services, async events and containerized deployments.", tags: ["Node.js", "Docker", "Kubernetes"], href: "https://github.com/dhatrishdixit/NodeMicroserviceTemplate", featured: true },
-  { title: "ClipSync", desc: "A full-stack video platform with creators, subscriptions, playlists, comments and analytics.", tags: ["React", "Node.js", "MongoDB"], href: "https://github.com/dhatrishdixit/videoTubeBackend", featured: true },
-  { title: "OAuth 2.0 & OpenID Connect", desc: "Authentication flows built from protocol fundamentals, including tokens, sessions and authorization.", tags: ["OAuth 2.0", "OIDC", "JWT"], href: "https://github.com/dhatrishdixit/OauthDemo", featured: true },
-  { title: "Anonymous Messages", desc: "A focused full-stack app for anonymous message collection and sharing.", tags: ["Next.js", "Full Stack"], href: "https://github.com/dhatrishdixit/anonMsg" },
-  { title: "Realtime Notifications", desc: "A small exploration of realtime communication and notification patterns.", tags: ["Next.js", "WebSockets"], href: "https://github.com/dhatrishdixit/realtime-notification-nextjs" },
-  { title: "Video Streaming POC", desc: "A practical experiment with browser-friendly video streaming.", tags: ["Node.js", "Streaming"], href: "https://github.com/dhatrishdixit/video-streamingPOC" },
+  { title: "ClipSync",   desc: "A full-stack video sharing platform inspired by modern creator ecosystems, built with React, Node.js, Express.js, and MongoDB. Features include secure authentication, video publishing and playback, search and recommendations, watch history, likes, comments, playlists, subscriptions, channel management, content sharing, and a creator dashboard with analytics. The backend exposes modular REST APIs with MongoDB aggregation pipelines, while Cloudinary powers media storage and email workflows handle account verification and password recovery.",
+  tags: [
+    "React",
+    "Node.js",
+    "Express",
+    "MongoDB",
+    "Cloudinary",
+    "JWT"
+  ],href: "https://clipsync.dhatrish.in/login", featured: true },
+  { title: "Event-Driven Microservices",desc: "A production-style event-driven microservices architecture built with Node.js and Express.js, where independent Posts, Comments, Moderation, and Query services communicate asynchronously through a centralized event bus. The system demonstrates loose coupling and eventual consistency, with Docker containerization and Kubernetes orchestration managed through Skaffold. It also includes service synchronization, event propagation and replay patterns, ingress-based routing, and a React client for interacting with the distributed system.",
+  tags: [
+    "Node.js",
+    "Express",
+    "Microservices",
+    "Docker",
+    "Kubernetes",
+    "Skaffold"
+  ], href: "https://github.com/dhatrishdixit/NodeMicroserviceTemplate", featured: true },
+  {   title: "OAuth 2.0 & OpenID Connect",
+  desc: "A full-stack authentication platform built to understand and implement OAuth 2.0 and OpenID Connect from first principles. It supports credential-based and Google authentication, access and refresh token flows, secure HTTP-only cookie sessions, protected routes, role-based admin authorization, token refresh and logout, with a React frontend and TypeScript/Express backend backed by Prisma. The project also includes rate limiting, request validation and dedicated authentication, admin and health-check APIs.",
+  tags: [
+    "TypeScript",
+    "OAuth 2.0",
+    "OpenID Connect",
+    "JWT",
+    "Express",
+    "Prisma"
+  ], href: "https://oauth.fe.dhatrish.in/", featured: true },
+  { title: "Realtime Notifications",   desc: "A full-stack real-time notification system built with Next.js, exploring event-driven updates and persistent user notifications. The project focuses on delivering updates to connected clients in real time while handling notification state, API communication, and the surrounding application flow in a modern Next.js architecture.",
+  tags: [
+    "Next.js",
+    "WebSockets",
+    "Realtime",
+    "TypeScript"
+  ], href: "https://github.com/dhatrishdixit/realtime-notification-nextjs" },
+  { title: "Freelance work - Hospital Website",desc: "Freelance healthcare website built for a real hospital, with a responsive public site and custom Node.js admin dashboard for managing content, media and analytics.",tags: ["Node.js", "Express", "EJS"],href: "https://www.bilaspurhospital.com/",featured: true }
 ];
 
 const skills = ["TypeScript", "JavaScript", "React", "Next.js", "Node.js", "Express", "MongoDB", "Prisma", "Docker", "Kubernetes", "C++", "SQL"];
@@ -312,7 +342,7 @@ export default function Home() {
             {projects.map((p, i) => (
               <a key={p.title} href={p.href} target="_blank" rel="noreferrer" className={`project-card group ${p.featured && i === 0 ? "md:col-span-2" : ""}`}>
                 <div className="flex items-start justify-between gap-6">
-                  <div><span className="text-xs text-muted-foreground/70">0{i + 1}</span><h3 className="mt-3 text-xl font-semibold tracking-tight">{p.title}</h3><p className="mt-3 max-w-2xl leading-7 text-muted-foreground">{p.desc}</p></div>
+                  <div><span className="text-xs text-muted-foreground/70">0{i + 1}</span><h3 className="mt-3 text-xl font-semibold tracking-tight">{p.title}</h3><p className="mt-3 leading-7 text-muted-foreground">{p.desc}</p></div>
                   <ArrowUpRight className="mt-1 size-5 shrink-0 text-muted-foreground transition-transform duration-300 group-hover:-translate-y-1 group-hover:translate-x-1 group-hover:text-foreground" />
                 </div>
                 <div className="mt-6 flex flex-wrap gap-2">{p.tags.map(t => <span key={t} className="tag">{t}</span>)}</div>
