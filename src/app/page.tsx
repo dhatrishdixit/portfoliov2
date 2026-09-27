@@ -1,6 +1,7 @@
 "use client"
 
-import { ArrowUpRight, Github, Linkedin, Mail, FileText, ExternalLink, Sun, Moon } from "lucide-react";
+import { ArrowUpRight, Github, Linkedin, Mail, FileText, ExternalLink, } from "lucide-react";
+import { TbBrandLeetcode } from "react-icons/tb";
 import { Button } from "@/components/ui/button";
 import createGlobe from 'cobe';
 import { useEffect, useRef, useState } from "react";
@@ -118,7 +119,7 @@ export default function Home() {
                return {
                     id:val.country,
                     location:[val.lat,val.long],
-                    size: Math.min(0.03),
+                    size: 0.02,
                }
            }
           );
@@ -239,6 +240,7 @@ export default function Home() {
             <div className="mt-9 flex flex-wrap items-center gap-5 text-sm text-muted-foreground">
               <a href="mailto:dhatrish.dev@gmail.com" className="inline-flex items-center gap-2 hover:text-foreground"><Mail className="size-4" />Email</a>
               <a href="https://www.linkedin.com/in/dhatrishdixit/" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 hover:text-foreground"><Linkedin className="size-4" />LinkedIn</a>
+              <a href="https://leetcode.com/u/dhatrish29/" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 hover:text-foreground"><TbBrandLeetcode className="size-4" />LeetCode</a>   
               <a href="/blog" className="inline-flex items-center gap-2 hover:text-foreground"><FileText className="size-4" />Writing</a>
             </div>
           </div>

@@ -1,10 +1,10 @@
 "use client"
 
-import { ArrowLeft, ArrowUpRight, CalendarDays } from "lucide-react";
+import { ArrowUpRight, CalendarDays } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useTheme } from 'next-themes';
 import { AnimatedThemeToggler } from '../../components/ui/animated-theme-toggler';
-import InteractiveHoverButton from "#components/shadcn-space/button/button-19";
+import InteractiveHoverButton from "#components/shadcn-space/button/button-19-back";
 import LiveUserCount from "#components/live-user-count";
 
 
@@ -16,16 +16,16 @@ const posts = [
 
 export default function BlogPage() {
 
-  const {resolvedTheme,setTheme} = useTheme();
+  const { resolvedTheme, setTheme } = useTheme();
 
 
   return <main className="min-h-screen">
-    <header className="sticky top-0 z-30 border-b border-border/70 bg-background/85 backdrop-blur-xl"><div className="container-x flex h-16 items-center justify-between"><a href="/" className="font-semibold tracking-tight">dhatrish.in</a><div className="flex items-center gap-1"><a className="nav-link hidden sm:inline-flex" href="/">Home</a><AnimatedThemeToggler
-                    theme={resolvedTheme === "dark" ? "dark" : "light"}
-                    onThemeChange={setTheme}
-                 />
-                 <LiveUserCount/>
-                 </div></div></header>
+    <header className="sticky top-0 z-30 border-b border-border/70 bg-background/85 backdrop-blur-xl flex"><div className="container-x flex h-16 items-center justify-between"><a href="/" className="font-semibold tracking-tight">dhatrish.in</a><div className="flex items-center gap-5"><a className="nav-link hidden sm:inline-flex" href="/">Home</a><AnimatedThemeToggler
+      theme={resolvedTheme === "dark" ? "dark" : "light"}
+      onThemeChange={setTheme}
+    />
+      <LiveUserCount />
+    </div></div></header>
     <section className="container-x py-24 sm:py-32">
       <InteractiveHoverButton className="mb-10 -ml-3"><a href="/">Back home</a></InteractiveHoverButton>
       <div className="max-w-3xl animate-fade-up"><p className="eyebrow">Journal</p><h1 className="mt-3 text-5xl font-semibold tracking-[-0.045em] sm:text-6xl">Things I’ve learned while building.</h1><p className="mt-6 text-lg leading-8 text-muted-foreground">Notes on authentication, backend engineering, distributed systems and the experiments behind my projects.</p></div>

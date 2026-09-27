@@ -4,7 +4,7 @@ import { ThemeProvider } from '../components/theme-provider';
 import { Analytics } from '@vercel/analytics/next';
 
 export const metadata: Metadata = {
-  title: "Dhatrish Singh Dixit — Software Engineer",
+  title: "dhatrish.in",
   description: "Software engineer building thoughtful products across the stack.",
 };
 
