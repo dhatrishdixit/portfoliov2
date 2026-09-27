@@ -16,14 +16,15 @@ const LIGHT_GLOBE = {
   dark: 0,
   diffuse:1.2,
   baseColor: [0.9, 0.9, 0.9] as [number, number, number],
-  markerColor: [1, 0, 0] as [number, number, number],
+  //markerColor: [0.25, 0.85, 0.75]  as [number, number, number],
+  markerColor: [0.376, 0.376, 0.376] as [number,number,number],
   glowColor: [1, 1, 1] as [number, number, number],
 };
 const DARK_GLOBE = {
   dark: 1,
   diffuse:0.6,
   baseColor: [0.3, 0.3, 0.3] as [number, number, number],
-  markerColor: [1, 0, 0] as [number, number, number],
+  markerColor: [0.847, 0.847, 0.847] as [number, number, number],
   glowColor: [0.15, 0.15, 0.15]  as [number, number, number],
 };
 
@@ -84,6 +85,27 @@ export default function Home() {
   const [{ r,t,colorT }, api] = useSpring(() => ({ r: 0,t:0,colorT: resolvedTheme === "dark" ? 1 : 0,config: { duration: 400 } }));
 
   useEffect(()=>{
+    if(markerLabel.length == 0) return;
+
+    const css = markerLabel.map((_,i)=>
+        `
+        ::view-transition-group(label-${i}),
+        ::view-transition-old(label-${i}),
+        ::view-transition-new(label-${i}) {
+          animation: none !important;
+          mix-blend-mode: normal;
+        }
+    `
+    ).join("\n");
+
+    const styleEle = document.createElement("style");
+    styleEle.textContent = css;
+    document.head.appendChild(styleEle);
+
+    return () => styleEle.remove()
+  },[markerLabel]);
+
+  useEffect(()=>{
      const markerUpdate = () => {
       const markerLabelArr:markerLabelType[] = [];
       userPerCountry().then((data)=>{
@@ -96,7 +118,7 @@ export default function Home() {
                return {
                     id:val.country,
                     location:[val.lat,val.long],
-                    size: 0.02,
+                    size: Math.min(0.03),
                }
            }
           );
@@ -267,6 +289,7 @@ export default function Home() {
                         style={{
                           positionAnchor: `--cobe-${m.id}`,
                           opacity: `var(--cobe-visible-${m.id}, 0)`,
+                          viewTransitionName:`label-${i}`
                         }}
                       >
                         {m.label}
