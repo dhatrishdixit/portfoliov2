@@ -29,7 +29,7 @@ export async function liveCount(){
 
 export async function userPerCountry():Promise<VisitMarker[]>{
    try {
-       const counts = await redis.hgetall<Record<string, string|number>>("visits_by_country");
+       const counts = await redis.hgetall<Record<string, string|number>>("visits_by_country_prod");
        if(!counts) return [];
 
 

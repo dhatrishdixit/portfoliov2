@@ -143,7 +143,7 @@ export default function Home() {
            markerRef.current = data.map((val)=> {
                markerLabelArr.push({
                 id: val.country,
-                label:`${val.country} : ${val.count} viewers`,
+                label:`${val.country} : ${val.count} ${val.count > 1 ? "viewers" : "viewer"}`,
                 count: val.count,
                })
                return {
@@ -313,7 +313,7 @@ export default function Home() {
                       //console.log(e.pointerId,e.pointerType);
                     }}
                   />
-                  {markerLabel.filter(m => m.count > 5).map((m,i) => {
+                  {markerLabel.filter((m,i) => i < 10).map((m,i) => {
                     return (
                       <div
                         key={m.id}

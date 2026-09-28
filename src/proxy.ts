@@ -4,12 +4,15 @@ import { redis } from './lib/redis';
 
 
 export async function proxy(request: NextRequest,event:NextFetchEvent) {
-  const userCountry = request.headers.get("x-vercel-ip-country");
+  //console.log("proxy hit")
+  const userCountry = request.headers.get("x-vercel-ip-country") || "IN";
   const isAlreadyCounted = request.cookies.get("visited")?.value;
   const response = NextResponse.next();
 
+
+
   if(userCountry && isAlreadyCounted == undefined){
-     event.waitUntil(redis.hincrby('visits_by_country',userCountry,1).catch(()=>{}));
+     event.waitUntil(redis.hincrby('visits_by_country_prod',userCountry,1).then(data => console.log(data)).catch(()=>{}));
      response.cookies.set('visited', '1', { maxAge: 60 * 60 * 24 })
   }
   
