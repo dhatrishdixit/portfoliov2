@@ -313,7 +313,7 @@ export default function Home() {
                       //console.log(e.pointerId,e.pointerType);
                     }}
                   />
-                  {markerLabel.filter((m,i) => i < 15).map((m,i) => {
+                  {markerLabel.filter((m,i) => i < 35).map((m,i) => {
                     return (
                       <div
                         key={m.id}
